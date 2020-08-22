@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Visualising a Pandemic</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrapstories.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300&display=swap" rel="stylesheet">
+    
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="chart_example_from_d3-graph-gallery.html"></script>
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="stories.html">COVID-19 in the UK</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="stories.html">Stories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Exta links</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="mt-3">Taxi drivers, security guards and care workers suffer the highest rate of COVID-19 deaths</h2>
+      </div>
+    </div>
+  </div>
+
+<!-- body text -->
+
+<hr>
+  <div class="container">
+
+      <div class="row">
+
+
+        <div class="col-lg-11">
+
+
+    <center><p class="lead"><b>Elementary occupations including taxi drivers and security guards suffered the highest rate of COVID-19 deaths between 9th March to 25th May, new data reveals.</b></p></center>
+
+          <p>Data released by <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/causesofdeath/datasets/coronaviruscovid19relateddeathsbyoccupationenglandandwales">Office of National Statistics</a> reveal that a total of 4,761 deaths, due to COVID-19, were registered between 9th March to 25th May of people aged 20 to 64 in England and Wales. </p>
+
+          <p>66% of these deaths were among men, with 3,122 losing their lives to the coronavirus.</p>
+
+<p>Men in elementary occupations had the highest rate of deaths due to COVID-19 with 40 deaths per 100,000 men.</p>
+
+<p>Specifically, taxi, cab drivers and chauffeurs, security guards and road transport drivers suffered the highest number of deaths during this time.</p>
+
+<p>Those working as security guards had the highest death rate with 74 deaths per 100,000 men. 
+</p>
+
+
+          <center>
+
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+
+<script>
+
+
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 100, bottom: 199, left: 100},
+    width = 850 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/oliviajanelawlor/majorproject/master/D3/maleoccupationdeath.csv", function(data) {
+
+// X axis
+var x = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(data.map(function(d) { return d.description; }))
+  .padding(0.2);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x))
+  .selectAll("text")
+    .attr("transform", "translate(-10,0)rotate(-45)")
+    .style("text-anchor", "end",);
+
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([0, 140])
+  .range([ height, 0]);
+svg.append("g")
+  .call(d3.axisLeft(y));
+
+// Bars
+svg.selectAll("mybar")
+  .data(data)
+  .enter()
+  .append("rect")
+    .attr("x", function(d) { return x(d.description); })
+    .attr("width", x.bandwidth())
+    .attr("fill", "#69b3a2")
+    // no bar at the beginning thus:
+    .attr("height", function(d) { return height - y(0); }) // always equal to 0
+    .attr("y", function(d) { return y(0); })
+
+// Animation
+svg.selectAll("rect")
+  .transition()
+  .duration(1000)
+  .attr("y", function(d) { return y(d.deaths); })
+  .attr("height", function(d) { return height - y(d.deaths); })
+  .delay(function(d,i){console.log(i) ; return(i*100)});
+
+})
+</script>
+
+          </center>
+
+          <br>
+            <p>Unite the Union, the UK’s leading union for employees in the workplace, released a <a href="https://unitetheunion.org/news-events/news/2020/june/ons-report-on-covid-19-worker-deaths-increases-concerns-about-inequality-and-working-practices/">statement</a> calling for an urgent “public inquiry into the death rates of workers from COVID-19” during the pandemic.</p>
+
+<p><b>The Unite assistant general secretary Diana Holland</b> said: “Many of the professions with the highest number of deaths are not only low paid but have both a long and unsocial hours culture, which often creates specific health problems over time.</p>
+    
+<blockquote class="blockquote">
+<p class="mb-0">“A full public inquiry into these deaths must investigate not only if these workers were failed by lack of PPE, but also if they were significantly more susceptible to the disease due to the cumulative effects that working long and unsocial hours had on their health.”
+</p>
+    </blockquote>
+
+          <p>Both men and women that worked in social care such as care workers and home carers had significantly higher rates of death involving COVID-19.</p>
+
+
+            <center> <a class="btn btn-light" href="occupations2.html" role="button">Read more</a></center>
+            
+            
+                 
+
+        </div>
+      </div>
+    </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
