@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Visualising a Pandemic</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrapstories.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+  <link href="css/bargraph.css" rel="stylesheet">
+  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script> 
+   
+
+    
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">COVID-19 in the UK</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="stories.html">Stories
+              <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="mt-3">“Women’s equality is simply not a priority for this government”: Feminist organisation concerned after gender pay gap data suspended</h2>
+      </div>
+    </div>
+  </div>
+
+<!-- body text -->
+   <center><img src="images/genderpaygapimage.jpg" style="max-height:100%; max-width: 100%"></center>
+
+<hr>
+  <div class="container">
+
+      <div class="row">
+
+
+        <div class="col-lg-11">
+            
+    
+
+    <center><p class="lead"><b>A feminist organisation are concerned after the government suspended deadlines for companies gender pay gap data due to the Coronavirus. </b></p></center>
+
+          <p>Almost half (47%) of companies with 250 employees or more didn’t submit their gender pay gap data during 2019/20 after the government suspended reporting deadlines because of the Coronavirus. </p>
+
+          <p>In a <a href="https://www.gov.uk/government/news/employers-do-not-have-to-report-gender-pay-gaps">statement</a> released in March by <b>Liz Truss, Minister for Women and Equalities, and David Issac, EHRC Chair,</b> said: “We recognise that employers across the country are facing unprecedented uncertainty and pressure at this time. </p>
+                
+          <p>“Because of this, we feel it is only right to suspend enforcement of the gender pay gap reporting this year.” </p>
+
+          <p>Due to the suspension of deadlines, there were over 5000 fewer companies that didn’t submit their gender pay gap data compared to the previous year.</p>    
+        </div>
+      </div>
+    </div>
+            
+<!--script for barchart -->
+     
+  <div class="chart">        
+<center><script>
+const letterFrequencies = [
+  { year: '2017/18', companies: 10566 },
+  { year: '2018/19', companies: 10832},
+  { year: '2019/20', companies: 5783 },
+];
+
+const margin = { top: 20, right: 20, bottom: 30, left: 280 };
+const width = 960 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+const xScale = d3.scaleBand()
+  .range([0, width])
+  .round(true)
+  .paddingInner(0.1); // space between bars (it's a ratio)
+
+const yScale = d3.scaleLinear()
+  .range([height, 0]);
+
+const xAxis = d3.axisBottom()
+  .scale(xScale);
+
+const yAxis = d3.axisLeft()
+  .scale(yScale)
+  .ticks(10);
+
+const svg = d3.select('body')
+  .append('svg')
+  .attr('width', width + margin.left + margin.right)
+  .attr('height', height + margin.top + margin.bottom)
+  .append('g')
+  .attr('transform', `translate(${margin.left}, ${margin.right})`);
+
+const tooltip = d3.select('body').append('div')
+  .attr('class', 'tooltip')
+  .style('opacity', 0);
+
+xScale
+  .domain(letterFrequencies.map(d => d.year));
+yScale
+  .domain([0, d3.max(letterFrequencies, d => d.companies)]);
+
+svg.append('g')
+  .attr('class', 'x axis')
+  .attr('transform', `translate(0, ${height})`)
+  .call(xAxis);
+
+svg.append('g')
+  .attr('class', 'y axis')
+  .call(yAxis)
+  .append('text')
+  .attr('transform', 'rotate(0)')
+  .attr('y', 3)
+  .attr('dy', '.90em')
+  .style('text-anchor', 'end')
+   .text('Companies');
+
+svg.selectAll('.bar').data(letterFrequencies)
+  .enter()
+  .append('rect')
+  .attr('class', 'bar')
+  .attr('x', d => xScale(d.year))
+  .attr('width', xScale.bandwidth())
+  .attr('y', d => yScale(d.companies))
+  .attr('height', d => height - yScale(d.companies))
+  .on('mouseover', (d) => {
+    tooltip.transition().duration(200).style('opacity', 0.9);
+    tooltip.html(`Number of companies that submitted data: <span>${d.companies}</span>`)
+      .style('left', `${d3.event.layerX}px`)
+      .style('top', `${(d3.event.layerY - 28)}px`);
+  })
+  .on('mouseout', () => tooltip.transition().duration(500).style('opacity', 0));
+
+
+    </script></center></div> 
+
+<div class="container">
+
+      <div class="row">
+
+
+        <div class="col-lg-11">
+            
+    <br>
+            
+    <!-- Trigger the Modal -->
+
+
+            <img id="myImg" src="images/infograph.png" alt="Infographic" style="float: right;width:100%;max-width:300px;padding-left: 6px">
+
+
+
+            <div id="myModal" class="modal">
+    
+    
+
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="img01">
+
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+            
+            
+     
+    <p><b>Sophie Walker, Chief Executive of Young Women’s Trust,</b> is extremely concerned that the government have decided to suspend the gender pay gap reporting after fighting hard to see it introduced in 2017:</p>  
+            
+    <p>“This act signalled something which has become a recurring theme of this pandemic - that women’s equality is simply not a priority for this government.</p>
+ 
+    <p>“Companies already didn’t take pay gap reporting seriously enough and now it’s going to be hard to get the momentum going again, at precisely the time women’s jobs and pay are collapsing at a disproportionate rate to men.”
+</p>
+            
+            
+                   
+    <p>In normal circumstances, if employers don’t submit their gender pay gap data, the EHRC (Equality and Human Rights Commission) have the authority to investigate.</p>
+
+    <p>This can lead to companies facing the maximum penalty in Crown Court of an unlimited fine after court action.</p> 
+            
+            
+    <p>Data from 2018/19 shows that 1 in 20 companies submitted their data late, with one company submitting their figures 16 months after the deadline.</p>
+    
+    <p>Using data releases from the Government for their own research, Walker said: “Pay gap reporting needs to be understood as a tool to start to expose the multitude of problems faced by women in the workplace.”</p>        
+    <p>However, she says that these issues have worsened during the Coronavirus pandemic.</p>
+           
+
+    <p>The Trades Union Congress (TUC) <a href="https://www.tuc.org.uk/pregnancy-maternity-and-work-during-covid-19-crisis">report</a> that some unions have seen employers have been furloughing pregnant women or sending them home on Statutory Sick Pay (SSP), which breaches women’s rights under health and safety law. </p>
+ 
+<p>One of the issues that were raised to the union included employers attempting to pay pregnant women 80% of their average earnings of SSP when entitled to 100% of their normal pay if they cannot work.</p> 
+ 
+<p>Walker says that Young Women’s Trust is urgently calling on the government to confirm that the gender pay gap reporting will return by April 2021 with additions:</p>
+ 
+<p>“We also want them to go a step further. The government must also make employers immediately publish their redundancy and job loss data by sex, ethnicity and disability so we can see the true impact on women and minorities, especially as the furlough scheme ends.”</p>
+        
+          
+        <center> <a class="btn btn-dark" href="stories.html" role="button">Return to stories</a></center>    
+            
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.slim.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="css/imagebig.js"></script> 
+
+    
+
+</body>
+
+</html>
