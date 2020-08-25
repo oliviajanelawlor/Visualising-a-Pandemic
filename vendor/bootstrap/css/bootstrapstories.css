@@ -23,7 +23,7 @@ body {
   line-height: 1.5;
   background-color: #404C5C;
   text-align: left;
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /*D3 graph*/
@@ -54,6 +54,7 @@ p {
   margin-bottom: 1rem;
   color: #fff;
   justify-content: justify;
+  font-size: 18px;
 }
 
 abbr[title],
@@ -169,6 +170,7 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+    overflow-x: hidden;
 }
 
 svg {
@@ -522,7 +524,8 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background:#fff 0.2;    
+  background:#fff 0.2;
+    overflow-x: hidden;
 }
 
 @media (min-width: 576px) {
