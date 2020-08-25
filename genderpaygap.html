@@ -94,7 +94,7 @@ const letterFrequencies = [
 ];
 
 const margin = { top: 20, right: 20, bottom: 30, left: 280 };
-const width = 960 - margin.left - margin.right;
+const width = 1000 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
 const xScale = d3.scaleBand()
@@ -113,11 +113,8 @@ const yAxis = d3.axisLeft()
   .ticks(10);
 
 const svg = d3.select('body')
-  .append('svg')
-  .attr('width', width + margin.left + margin.right)
-  .attr('height', height + margin.top + margin.bottom)
-  .append('g')
-  .attr('transform', `translate(${margin.left}, ${margin.right})`);
+.append("svg")
+  .attr("viewBox", `-150 0 1000 500`);;
 
 const tooltip = d3.select('body').append('div')
   .attr('class', 'tooltip')
@@ -174,7 +171,7 @@ svg.selectAll('.bar').data(letterFrequencies)
     <!-- Trigger the Modal -->
 
 
-            <img id="myImg" src="images/infograph1.png" alt="Infographic" style="float: right;width:100%;max-width:300px;padding-left: 6px">
+            <img id="myImg" src="images/infograph1.png" alt="Infographic" style="float: right;width:100%;max-width:200px;padding-left: 6px">
 
 
 
