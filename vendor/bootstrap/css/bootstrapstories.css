@@ -11,6 +11,14 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+html, body, {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
@@ -23,7 +31,7 @@ body {
   line-height: 1.5;
   background-color: #404C5C;
   text-align: left;
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 /*D3 graph*/
@@ -45,7 +53,7 @@ h1{
   margin-bottom: 0.5rem;
   color:white;
   weight:bolder;
-  padding-top: 200px;
+  padding-top: 20px;
   padding-bottom: 50px;
 }
 
@@ -54,7 +62,6 @@ p {
   margin-bottom: 1rem;
   color: #fff;
   justify-content: justify;
-  font-size: 18px;
 }
 
 abbr[title],
@@ -170,7 +177,6 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
-    overflow-x: hidden;
 }
 
 svg {
@@ -524,8 +530,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background:#fff 0.2;
-    overflow-x: hidden;
+  background:#fff 0.2;    
 }
 
 @media (min-width: 576px) {
@@ -6719,7 +6724,6 @@ a.close.disabled {
 
 .bg-primary {
   background-color: #779ecb !important;
-    padding: 10px;
 
 }
 

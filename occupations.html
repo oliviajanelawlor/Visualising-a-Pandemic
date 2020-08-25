@@ -58,7 +58,6 @@
 
 <!-- body text -->
 
-    <center><img src="images/taxi.jpg"></center>
     
 <hr>
   <div class="container">
@@ -87,24 +86,23 @@
 
 
 <!-- Create a div where the graph will take place -->
+              
+<div class="graphs">              
 <div id="my_dataviz"></div>
 
 <script>
 
 
 // set the dimensions and margins of the graph
-var margin = {top: 30, right: 100, bottom: 199, left: 100},
+var margin = {top: 30, right: 0, bottom: 199, left: 0},
     width = 850 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
+    
 var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+.append("svg")
+  .attr("viewBox", `-80 -10 950 500`);
 
 // Parse the Data
 d3.csv("https://raw.githubusercontent.com/oliviajanelawlor/majorproject/master/D3/maleoccupationdeath.csv", function(data) {
@@ -150,6 +148,7 @@ svg.selectAll("rect")
 
 })
 </script>
+    </div>
 
           </center>
 
