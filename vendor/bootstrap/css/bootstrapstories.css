@@ -177,7 +177,9 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
-    padding: 20px;
+    padding: 10px;
+    margin: 10px;
+    height:500px;
 }
 
 svg {
