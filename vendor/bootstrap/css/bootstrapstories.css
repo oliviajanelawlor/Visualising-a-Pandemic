@@ -29,22 +29,22 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  background-color: #404C5C;
+  background-color: #404c5c;
   text-align: left;
     overflow-x: hidden;
 }
 
 /*D3 graph*/
 #my_dataviz{
-        background-color: #404C5C;}
+        background-color: #404c5c;}
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
 
 hr{
-  color: white 0.;
-  size: 3;
+  background-color: gray;
+  height: 1.3px;
   width: 40%;
 }
 
@@ -135,13 +135,13 @@ sup {
 }
 
 a {
-  color: #007bff;
+  color: #FFDE23;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #0056b3;
+  color: #FFDEAD;
   text-decoration: underline;
 }
 
@@ -177,6 +177,7 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+    padding: 20px;
 }
 
 svg {
@@ -2512,6 +2513,7 @@ textarea.form-control {
 }
 
 .btn {
+   
   display: inline-block;
   font-weight: 400;
   color: #212529;
